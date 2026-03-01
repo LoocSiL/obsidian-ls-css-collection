@@ -1,6 +1,6 @@
 # Коллекция CSS-сниппетов для настройки внешнего вида Obsidian
 
-![](https://img.shields.io/github/v/release/LoocSiL/obsidian-ls-css?style=flat-square&color=blue) ![](https://img.shields.io/github/license/LoocSiL/obsidian-ls-css?style=flat-square&color=green) ![](https://img.shields.io/github/downloads/LoocSiL/obsidian-ls-css/total?style=flat-square&color=purple)
+![](https://img.shields.io/github/v/release/LoocSiL/obsidian-ls-css-collection) ![](https://img.shields.io/github/release-date/LoocSiL/obsidian-ls-css-collection) ![](https://img.shields.io/github/license/LoocSiL/obsidian-ls-css-collection) ![](https://img.shields.io/github/downloads/LoocSiL/obsidian-ls-css-collection/total)
 
 ---
 
