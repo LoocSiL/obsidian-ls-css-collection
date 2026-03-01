@@ -1,0 +1,317 @@
+/* @settings
+
+name: 💢 LS Modular CSS - File Type Colors (1.0.0-alfa.1)
+id: file-type-colors
+settings:
+
+    -
+        id: ftc_about
+        title: 🅾 Описание
+        type: heading
+        collapsed: true
+        level: 2
+    -
+        id: ftc_info
+        title:
+        type: info-text
+        markdown: true
+        description: "_Вопросы по CSS сниппету можно задать автору **[здесь](https://t.me/excel_cad_bim_chat)**_.</br></br> **Что делает сниппет:** раскрашивает названия файлов в проводнике в зависимости от их типа (расширения). </br></br> **Возможности:** </br> • Отдельные цвета для файлов Obsidian (.md, .canvas, .excalidraw, .base) </br> • Цвета для вложений (PDF, изображения, видео, аудио) </br> • Цвета для внешних файлов (MS Office, код) </br> • Цвет для всех остальных типов файлов </br> • Возможность включить/выключить каждую категорию </br> • Настройка цветов через Style Settings"
+
+    -
+        id: general-settings-heading
+        title: 1️⃣ Общие настройки
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: enable-active-file-color
+        title: Применять цвет для активного файла
+        description: Если выключено, активный файл будет иметь стандартный цвет
+        type: class-toggle
+        default: false
+
+    -
+        id: obsidian-files-heading
+        title: 2️⃣ Файлы Obsidian
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: enable-markdown
+        title: Включить Markdown
+        type: class-toggle
+        default: true
+    -
+        id: markdown-color
+        title: Цвет Markdown
+        type: variable-color
+        format: hex
+        default: '#38BDF8'
+    -
+        id: enable-canvas
+        title: Включить Canvas
+        type: class-toggle
+        default: true
+    -
+        id: canvas-color
+        title: Цвет Canvas
+        type: variable-color
+        format: hex
+        default: '#F472B6'
+    -
+        id: enable-excalidraw
+        title: Включить Excalidraw
+        type: class-toggle
+        default: true
+    -
+        id: excalidraw-color
+        title: Цвет Excalidraw
+        type: variable-color
+        format: hex
+        default: '#22D3EE'
+    -
+        id: enable-base
+        title: Включить Base
+        type: class-toggle
+        default: true
+    -
+        id: base-color
+        title: Цвет Base
+        type: variable-color
+        format: hex
+        default: '#A3E635'
+
+    -
+        id: attachments-heading
+        title: 3️⃣ Вложения
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: enable-pdf
+        title: Включить PDF
+        type: class-toggle
+        default: true
+    -
+        id: pdf-color
+        title: Цвет PDF
+        type: variable-color
+        format: hex
+        default: '#FB7185'
+    -
+        id: enable-images
+        title: Включить Изображения
+        type: class-toggle
+        default: true
+    -
+        id: images-color
+        title: Цвет Изображения
+        type: variable-color
+        format: hex
+        default: '#FBBF24'
+    -
+        id: enable-video
+        title: Включить Видео
+        type: class-toggle
+        default: true
+    -
+        id: video-color
+        title: Цвет Видео
+        type: variable-color
+        format: hex
+        default: '#D946EF'
+    -
+        id: enable-audio
+        title: Включить Аудио
+        type: class-toggle
+        default: true
+    -
+        id: audio-color
+        title: Цвет Аудио
+        type: variable-color
+        format: hex
+        default: '#34D399'
+
+    -
+        id: external-files-heading
+        title: 4️⃣ Внешние файлы
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: enable-msoffice
+        title: Включить MS Office
+        type: class-toggle
+        default: true
+    -
+        id: msoffice-color
+        title: Цвет MS Office
+        type: variable-color
+        format: hex
+        default: '#93A5CF'
+    -
+        id: enable-code
+        title: Включить Код
+        type: class-toggle
+        default: true
+    -
+        id: code-color
+        title: Цвет Код
+        type: variable-color
+        format: hex
+        default: '#CABA76'
+    -
+        id: enable-misc
+        title: Включить Разное
+        type: class-toggle
+        default: true
+    -
+        id: misc-color
+        title: Цвет Разное
+        type: variable-color
+        format: hex
+        default: '#94A3B8'
+
+*/
+
+/* ========================================
+   ПЕРЕМЕННЫЕ ПО УМОЛЧАНИЮ
+   ======================================== */
+
+body {
+    /* Файлы Obsidian (яркие) */
+    --markdown-color: #38BDF8;
+    --canvas-color: #F472B6;
+    --excalidraw-color: #22D3EE;
+    --base-color: #A3E635;
+
+    /* Вложения (средние) */
+    --pdf-color: #FB7185;
+    --images-color: #FBBF24;
+    --video-color: #D946EF;
+    --audio-color: #34D399;
+
+    /* Внешние файлы (приглушённые) */
+    --msoffice-color: #93A5CF;
+    --code-color: #CABA76;
+    --misc-color: #94A3B8;
+}
+
+/* ========================================
+   СБРОС ЦВЕТА ДЛЯ АКТИВНОГО ФАЙЛА
+   (когда настройка выключена - по умолчанию)
+   ======================================== */
+
+body:not(.enable-active-file-color) .nav-file-title.is-active .nav-file-title-content {
+    color: var(--nav-item-color-active) !important;
+}
+
+/* ========================================
+   РАЗНОЕ (базовое правило для всех файлов)
+   Применяется ко всем, переопределяется ниже
+   ======================================== */
+
+body.enable-misc .nav-file-title .nav-file-title-content {
+    color: var(--misc-color);
+}
+
+/* ========================================
+   📌 ФАЙЛЫ OBSIDIAN
+   ======================================== */
+
+/* Markdown (.md) — исключая Excalidraw */
+body.enable-markdown .nav-file-title[data-path$=".md"]:not([data-path$=".excalidraw.md"]) .nav-file-title-content {
+    color: var(--markdown-color);
+}
+
+/* Canvas (.canvas) */
+body.enable-canvas .nav-file-title[data-path$=".canvas"] .nav-file-title-content {
+    color: var(--canvas-color);
+}
+
+/* Excalidraw (.excalidraw.md, .excalidraw) */
+body.enable-excalidraw .nav-file-title[data-path$=".excalidraw.md"] .nav-file-title-content,
+body.enable-excalidraw .nav-file-title[data-path$=".excalidraw"] .nav-file-title-content {
+    color: var(--excalidraw-color);
+}
+
+/* Base (.base) */
+body.enable-base .nav-file-title[data-path$=".base"] .nav-file-title-content {
+    color: var(--base-color);
+}
+
+/* ========================================
+   📎 ВЛОЖЕНИЯ
+   ======================================== */
+
+/* PDF (.pdf) */
+body.enable-pdf .nav-file-title[data-path$=".pdf"] .nav-file-title-content {
+    color: var(--pdf-color);
+}
+
+/* Изображения */
+body.enable-images .nav-file-title[data-path$=".png"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".jpg"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".jpeg"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".gif"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".svg"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".webp"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".bmp"] .nav-file-title-content,
+body.enable-images .nav-file-title[data-path$=".ico"] .nav-file-title-content {
+    color: var(--images-color);
+}
+
+/* Видео */
+body.enable-video .nav-file-title[data-path$=".mp4"] .nav-file-title-content,
+body.enable-video .nav-file-title[data-path$=".mkv"] .nav-file-title-content,
+body.enable-video .nav-file-title[data-path$=".avi"] .nav-file-title-content,
+body.enable-video .nav-file-title[data-path$=".mov"] .nav-file-title-content,
+body.enable-video .nav-file-title[data-path$=".webm"] .nav-file-title-content,
+body.enable-video .nav-file-title[data-path$=".wmv"] .nav-file-title-content {
+    color: var(--video-color);
+}
+
+/* Аудио */
+body.enable-audio .nav-file-title[data-path$=".mp3"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".wav"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".flac"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".ogg"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".m4a"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".aac"] .nav-file-title-content,
+body.enable-audio .nav-file-title[data-path$=".wma"] .nav-file-title-content {
+    color: var(--audio-color);
+}
+
+/* ========================================
+   📦 ВНЕШНИЕ ФАЙЛЫ
+   ======================================== */
+
+/* MS Office */
+body.enable-msoffice .nav-file-title[data-path$=".docx"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".doc"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".xlsx"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".xls"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".pptx"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".ppt"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".csv"] .nav-file-title-content,
+body.enable-msoffice .nav-file-title[data-path$=".rtf"] .nav-file-title-content {
+    color: var(--msoffice-color);
+}
+
+/* Код */
+body.enable-code .nav-file-title[data-path$=".py"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".js"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".ts"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".css"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".html"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".htm"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".json"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".yaml"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".yml"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".xml"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".sh"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".bat"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".ps1"] .nav-file-title-content,
+body.enable-code .nav-file-title[data-path$=".sql"] .nav-file-title-content {
+    color: var(--code-color);
+}

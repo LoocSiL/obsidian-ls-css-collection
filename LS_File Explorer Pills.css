@@ -1,0 +1,787 @@
+/*
+Автор: Липатов Сергей
+https://t.me/excel_cad_bim
+Этот сниппет создавался для темы **🐳  [Underwater](https://github.com/Seniblue/Underwater)**, но может работать и с другими темами.
+*/
+
+/* @settings
+
+name: 💢 LS Modular CSS - File Explorer Pills (1.0.0-rc4)
+id: uw-fe-pills
+settings:
+
+  -
+    id: uwfe_about
+    title: 🅾 Описание
+    type: heading
+    collapsed: true
+    level: 2
+
+  -
+    id: uwfe_info
+    title:
+    type: info-text
+    markdown: true
+    description: "_Вопросы по CSS сниппету можно задать автору **[здесь](https://t.me/excel_cad_bim_chat)**_.</br></br> **Что делает сниппет:** добавляет цветную фоновую заливку в виде плашек (pills) для файлов и папок в проводнике. </br></br> **Возможности:** </br> • Два режима - *inline* (под текстом) или *full row* (на всю строку) </br> • Раздельные цвета для файлов и папок </br> • Настройка скругления, отступов и зазоров </br> • Перенос длинных названий </br> • Подсветка раскрытых папок </br> • Добавление икон папок и файлов"
+
+# Выбор режима
+  -
+    id: uwfe_mode
+    title: 1️⃣ Выбор режима
+    type: heading
+    collapsed: true
+    level: 2
+
+  -
+    id: uw-fe-pill-mode
+    title: Режим ширины плашки
+    type: class-select
+    allowEmpty: false
+    default: uw-fe-pill-row
+    options:
+      -
+        label: На всю строку (full row)
+        value: uw-fe-pill-row
+      -
+        label: Под текстом (inline)
+        value: uw-fe-pill-inline
+
+
+  -
+    id: uw-fe-row-bg-from-text
+    title: "Фон начинать от текста (для файлов и папок в режиме «На всю строку»)"
+    description: "Если включено - фон рисуется на title-content (без левого 'гаттера'). Если выключено - фон на всей строке."
+    type: class-toggle
+    default: false
+
+  -
+    id: uw-fe-wrap-names
+    title: Перенос длинных имён (файлы/папки)
+    description: "Включает перенос строк у длинных названий и убирает горизонтальный скролл в проводнике."
+    type: class-toggle
+    default: true
+
+
+# Работа с папками
+  -
+    id: uwfe_folders
+    title: 2️⃣ Папки
+    type: heading
+    collapsed: true
+    level: 2
+
+  -
+    id: uw-fe-folders-enabled
+    title: Включить фон для папок
+    type: class-toggle
+    default: true
+
+  -
+    id: uw-fe-folder-icons-enabled
+    title: Показывать иконки папок
+    description: "Заменяет стрелку на иконку папки (открытая/закрытая)."
+    type: class-toggle
+    default: true
+
+  -
+    id: uw-fe-folder-expanded-active
+    title: Подсвечивать раскрытые папки (expanded)
+    description: "Использует цвет 'Папка - активная' для раскрытых папок."
+    type: class-toggle
+    default: false
+
+  -
+    id: uwfe_colors_folders
+    title: Цвета - папки
+    type: heading
+    level: 3
+
+  -
+    id: uw-fe-folder-bg
+    title: Папка - обычная
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#00B4E61F'
+
+  -
+    id: uw-fe-folder-bg-hover
+    title: Папка - при наведении (hover)
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#E5737333'
+
+  -
+    id: uw-fe-folder-bg-active
+    title: Папка - активная (раскрытая)
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#00B4E64D'
+
+  -
+    id: uw-fe-folder-bg-selected
+    title: Папка — выделенная (selected)
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#66BB6A80'
+
+
+# Работа с файлами
+  -
+    id: uwfe_files
+    title: 3️⃣ Файлы
+    type: heading
+    collapsed: true
+    level: 2
+
+  -
+    id: uw-fe-files-enabled
+    title: Включить фон для файлов
+    type: class-toggle
+    default: true
+
+  -
+    id: uw-fe-file-icons-enabled
+    title: Показывать иконки файлов
+    description: "Добавляет иконки по типу файла (.md, .canvas, изображения, видео и т.д.)."
+    type: class-toggle
+    default: true
+
+  -
+    id: uwfe_colors_files
+    title: Цвета - файлы
+    type: heading
+    level: 3
+
+  -
+    id: uw-fe-file-bg
+    title: Файл - обычный
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#FFD54F1F'
+
+  -
+    id: uw-fe-file-bg-hover
+    title: Файл - при наведении (hover)
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#E5737333'
+
+  -
+    id: uw-fe-file-bg-active
+    title: Файл - активный
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#64B5F6B0'
+
+  -
+    id: uw-fe-file-bg-selected
+    title: Файл — выделенный (selected)
+    type: variable-color
+    format: hex
+    opacity: true
+    default: '#66BB6A80'
+
+
+# Геометрия
+  -
+    id: uwfe_geom
+    title: 4️⃣ Геометрия
+    type: heading
+    collapsed: true
+    level: 2
+
+  -
+    id: uw-fe-radius
+    title: Скругление плашек (px)
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 24
+    step: 1
+    format: px
+
+  -
+    id: uwfe_geom_margin
+    title: Внешний отступ (margin)
+    type: heading
+    level: 3
+
+  -
+    id: uw-fe-margin-y
+    title: Вертикальный отступ между строками (px)
+    description: "Можно в минус, чтобы уплотнить список."
+    type: variable-number-slider
+    default: 0
+    min: -10
+    max: 12
+    step: 1
+    format: px
+
+  -
+    id: uwfe_geom_padding
+    title: Внутренний отступ (padding)
+    type: heading
+    level: 3
+
+  -
+    id: uw-fe-pad-x
+    title: Горизонтальный отступ слева/справа (px)
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 32
+    step: 1
+    format: px
+
+  -
+    id: uw-fe-pad-top
+    title: Вертикальный отступ сверху (px)
+    type: variable-number-slider
+    default: 4
+    min: 0
+    max: 20
+    step: 1
+    format: px
+
+  -
+    id: uw-fe-pad-bottom
+    title: Вертикальный отступ снизу (px)
+    type: variable-number-slider
+    default: 4
+    min: 0
+    max: 20
+    step: 1
+    format: px
+
+*/
+
+
+/* ========== Переменные и Fallback ========== */
+:root {
+  /* Геометрия */
+  --uw-fe-radius: 8px;
+  --uw-fe-pad-x: 8px;
+  --uw-fe-pad-top: 4px;
+  --uw-fe-pad-bottom: 4px;
+  --uw-fe-margin-y: 0;
+
+  /* Цвета файлов */
+  --uw-fe-file-bg: #FFD54F1F;
+  --uw-fe-file-bg-hover: #E5737333;
+  --uw-fe-file-bg-active: #64B5F6B0;
+  --uw-fe-file-bg-selected: #66BB6A80;
+
+  /* Цвета папок */
+  --uw-fe-folder-bg: #00B4E61F;
+  --uw-fe-folder-bg-hover: #E5737333;
+  --uw-fe-folder-bg-active: #00B4E64D;
+  --uw-fe-folder-bg-selected: #66BB6A80;
+
+  /* Анимация */
+  --uw-fe-transition: background-color 120ms ease;
+
+  /* Иконки папок */
+  --uw-fe-icon-folder-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 24' fill='none' stroke='currentColor' stroke-linejoin='round' stroke-linecap='round' stroke-width='2'%3E%3Cpath d='M6 14l1.45-2.9A2 2 0 0 1 9.24 10H22a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H20a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+  --uw-fe-icon-folder-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 24' fill='none' stroke='currentColor' stroke-linejoin='round' stroke-linecap='round' stroke-width='2'%3E%3Cpath d='M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2z'/%3E%3Cpath d='M2 10h20' /%3E%3C/svg%3E");
+
+  /* Иконки файлов */
+  --uw-fe-icon-file: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-md: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z'/%3E%3Cpath d='M14 2v6h6m-4 5H8m8 4H8m2-8H8'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-canvas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3h7v9H3zm11 0h7v5h-7zm0 9h7v9h-7zM3 16h7v5H3z'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-excalidraw: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5'/%3E%3Cpath d='M14 2v6h6'/%3E%3Cpath d='M10.4 12.6a2 2 0 0 1 3 3L8 21l-4 1 1-4Z'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z'/%3E%3Cpath d='M14 2v6h6'/%3E%3Ccircle cx='10' cy='13' r='2'/%3E%3Cpath d='m20 17-1.09-1.09a2 2 0 0 0-2.82 0L10 22'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-audio: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l12-2v13M9 9l12-2'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-video: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 11v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8H4Z'/%3E%3Cpath d='m4 11-.88-2.87a2 2 0 0 1 1.33-2.5l11.48-3.5a2 2 0 0 1 2.5 1.32l.87 2.87L4 11.01Z'/%3E%3Cpath d='M6.6 4.99l3.38 4.2m1.88-5.81l3.38 4.2'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-webm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M10 8l6 4-6 4V8z'/%3E%3C/svg%3E");
+  --uw-fe-icon-file-loom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v18'/%3E%3Crect width='18' height='18' x='3' y='3' rx='2'/%3E%3Cpath d='M3 9h18M3 15h18'/%3E%3C/svg%3E");
+}
+
+
+/* ========== Базовый селектор (для сокращения кода) ========== */
+/* Используем CSS Nesting для file-explorer */
+
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  /* Вертикальный margin между строками */
+  & :is(.nav-file-title, .nav-folder-title) {
+    margin-block: var(--uw-fe-margin-y, 0);
+  }
+
+  /* Убрать фокусную рамку */
+  & .tree-item-self.has-focus {
+    box-shadow: none !important;
+  }
+
+  /* Компенсация margin у первого вложенного элемента */
+  & .tree-item-children > .tree-item:nth-child(2) > :is(.nav-folder-title, .nav-file-title) {
+    margin-block-start: 0 !important;
+  }
+}
+
+
+/* ========== Перенос длинных имён ========== */
+body.uw-fe-wrap-names .workspace-leaf-content[data-type="file-explorer"] {
+
+  & :is(.nav-folder-title, .nav-folder-title-content, .nav-file-title-content) {
+    max-width: 100%;
+  }
+
+  & :is(.nav-folder-title-content, .nav-file-title-content) {
+    white-space: break-spaces;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+  }
+
+  & .nav-files-container {
+    overflow-x: hidden;
+  }
+}
+
+/* Выравнивание иконок в inline режиме (как в full-row) */
+body.uw-fe-pill-inline .workspace-leaf-content[data-type="file-explorer"] {
+
+  & :is(.nav-file-title, .nav-folder-title) {
+    display: flex;
+    align-items: center;
+  }
+
+  & :is(.nav-file-title-content, .nav-folder-title-content) {
+    width: fit-content;
+  }
+}
+
+
+/* =========================================================
+   РЕЖИМ 1: Под текстом (inline)
+   ========================================================= */
+
+/* --- ФАЙЛЫ (inline) --- */
+body.uw-fe-pill-inline.uw-fe-files-enabled .workspace-leaf-content[data-type="file-explorer"] {
+
+  /* Сброс padding и фона на родителе */
+  & .nav-file-title {
+    background: transparent !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  & .nav-file-title .nav-file-title-content {
+    display: inline-block;
+    padding: var(--uw-fe-pad-top, 4px) var(--uw-fe-pad-x, 8px) var(--uw-fe-pad-bottom, 4px);
+    border-radius: var(--uw-fe-radius, 8px);
+    background-color: var(--uw-fe-file-bg, #00B4E61F) !important;
+    box-decoration-break: clone;
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-file-title:hover .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-file-title.is-active .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-file-title.is-selected .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-selected, #00B4E680) !important;
+  }
+
+  /* Hover поверх active/selected */
+  & .nav-file-title:is(.is-active, .is-selected):hover .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+}
+
+/* --- ФАЙЛЫ (inline) без нашего фона — для штатного выделения --- */
+body.uw-fe-pill-inline:not(.uw-fe-files-enabled) .workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-file-title {
+    padding-top: var(--uw-fe-pad-top, 4px) !important;
+    padding-bottom: var(--uw-fe-pad-bottom, 4px) !important;
+  }
+}
+
+/* --- ПАПКИ (inline) --- */
+body.uw-fe-pill-inline.uw-fe-folders-enabled .workspace-leaf-content[data-type="file-explorer"] {
+
+  /* Сброс padding и фона на родителе */
+  & .nav-folder-title {
+    background: transparent !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  & .nav-folder-title .nav-folder-title-content {
+    display: inline-block;
+    padding: var(--uw-fe-pad-top, 4px) var(--uw-fe-pad-x, 8px) var(--uw-fe-pad-bottom, 4px);
+    border-radius: var(--uw-fe-radius, 8px);
+    background-color: var(--uw-fe-folder-bg, #00B4E61F) !important;
+    box-decoration-break: clone;
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-folder-title:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder-title.is-selected .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  /* Hover поверх selected */
+  & .nav-folder-title.is-selected:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+/* --- ПАПКИ (inline) без нашего фона — для штатного выделения --- */
+body.uw-fe-pill-inline:not(.uw-fe-folders-enabled) .workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder-title {
+    padding-top: var(--uw-fe-pad-top, 4px) !important;
+    padding-bottom: var(--uw-fe-pad-bottom, 4px) !important;
+  }
+}
+
+/* Раскрытая папка = активная (inline) */
+body.uw-fe-pill-inline.uw-fe-folders-enabled.uw-fe-folder-expanded-active
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title:hover .nav-folder-title-content,
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+
+/* =========================================================
+   РЕЖИМ 2: На всю строку (full row)
+   ========================================================= */
+
+/* База full-row */
+body.uw-fe-pill-row .workspace-leaf-content[data-type="file-explorer"] {
+
+  & :is(.nav-file-title, .nav-folder-title) {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    /* Вертикальный padding на родителе — влияет на высоту фона */
+    padding-top: var(--uw-fe-pad-top, 4px) !important;
+    padding-bottom: var(--uw-fe-pad-bottom, 4px) !important;
+  }
+
+  & :is(.nav-file-title-content, .nav-folder-title-content) {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: block;
+    max-width: 100%;
+    background: transparent !important;
+    /* Горизонтальный padding — смещает текст от краёв фона (слева и справа) */
+    padding: 0 var(--uw-fe-pad-x, 8px);
+  }
+
+  /* Фикс обрезки папок справа */
+  & :is(.nav-folder, .nav-folder-title) {
+    max-width: none;
+    overflow: visible;
+  }
+}
+
+
+/* --- ФАЙЛЫ: фон на всей строке (по умолчанию) --- */
+body.uw-fe-pill-row.uw-fe-files-enabled:not(.uw-fe-row-bg-from-text)
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-file-title {
+    background-color: var(--uw-fe-file-bg, #00B4E61F) !important;
+    border-radius: var(--uw-fe-radius, 8px);
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-file-title:hover {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-file-title.is-active {
+    background-color: var(--uw-fe-file-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-file-title.is-selected {
+    background-color: var(--uw-fe-file-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-file-title:is(.is-active, .is-selected):hover {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+}
+
+
+/* --- ФАЙЛЫ: фон от текста --- */
+body.uw-fe-pill-row.uw-fe-files-enabled.uw-fe-row-bg-from-text
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-file-title {
+    background: transparent !important;
+  }
+
+  & .nav-file-title .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg, #00B4E61F) !important;
+    border-radius: var(--uw-fe-radius, 8px);
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-file-title:hover .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-file-title.is-active .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-file-title.is-selected .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-file-title:is(.is-active, .is-selected):hover .nav-file-title-content {
+    background-color: var(--uw-fe-file-bg-hover, #00B4E633) !important;
+  }
+}
+
+
+/* --- ПАПКИ: фон на всей строке (по умолчанию) --- */
+body.uw-fe-pill-row.uw-fe-folders-enabled:not(.uw-fe-row-bg-from-text)
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder-title {
+    background-color: var(--uw-fe-folder-bg, #00B4E61F) !important;
+    border-radius: var(--uw-fe-radius, 8px);
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-folder-title:hover {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder-title.is-selected {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-folder-title.is-selected:hover {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+/* Раскрытая папка = активная (full-row, фон на строке) */
+body.uw-fe-pill-row.uw-fe-folders-enabled.uw-fe-folder-expanded-active:not(.uw-fe-row-bg-from-text)
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title {
+    background-color: var(--uw-fe-folder-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title:hover {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected:hover {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+
+/* --- ПАПКИ: фон от текста --- */
+body.uw-fe-pill-row.uw-fe-folders-enabled.uw-fe-row-bg-from-text
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder-title {
+    background: transparent !important;
+  }
+
+  & .nav-folder-title .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg, #00B4E61F) !important;
+    border-radius: var(--uw-fe-radius, 8px);
+    transition: var(--uw-fe-transition);
+  }
+
+  & .nav-folder-title:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder-title.is-selected .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-folder-title.is-selected:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+/* Раскрытая папка = активная (full-row, фон от текста) */
+body.uw-fe-pill-row.uw-fe-folders-enabled.uw-fe-row-bg-from-text.uw-fe-folder-expanded-active
+.workspace-leaf-content[data-type="file-explorer"] {
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-active, #00B4E64D) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-selected, #00B4E680) !important;
+  }
+
+  & .nav-folder:not(.is-collapsed) > .nav-folder-title.is-selected:hover .nav-folder-title-content {
+    background-color: var(--uw-fe-folder-bg-hover, #00B4E633) !important;
+  }
+}
+
+
+/* =========================================================
+   ИКОНКИ ПАПОК
+   ========================================================= */
+
+body.uw-fe-folder-icons-enabled .workspace-leaf-content[data-type="file-explorer"] {
+
+  /* Базовые стили иконки */
+  & .tree-item .collapse-icon {
+    -webkit-mask-image: var(--uw-fe-icon-folder-open);
+    mask-image: var(--uw-fe-icon-folder-open);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: currentColor;
+    display: flex;
+    flex-basis: 100%;
+    height: 16px;
+    width: 17px;
+  }
+
+  /* Иконка закрытой папки */
+  & .tree-item.is-collapsed .collapse-icon {
+    -webkit-mask-image: var(--uw-fe-icon-folder-closed);
+    mask-image: var(--uw-fe-icon-folder-closed);
+  }
+
+  /* Скрыть оригинальную SVG стрелку */
+  & .tree-item .collapse-icon svg {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   ИКОНКИ ФАЙЛОВ
+   ========================================================= */
+
+body.uw-fe-file-icons-enabled .workspace-leaf-content[data-type="file-explorer"] {
+
+  /* Базовая иконка файла */
+  & .nav-file .nav-file-title[data-path]::before {
+    content: "";
+    display: flex;
+    flex-shrink: 0;
+    position: absolute;
+    height: var(--size-4-4);
+    width: var(--size-4-4);
+    margin-left: calc(-1 * var(--size-4-5));
+    opacity: var(--icon-opacity);
+    background-color: var(--icon-color);
+    -webkit-mask-image: var(--uw-fe-icon-file);
+    mask-image: var(--uw-fe-icon-file);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* Markdown файлы */
+  & .nav-file .nav-file-title[data-path$=".md"]::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-md);
+    mask-image: var(--uw-fe-icon-file-md);
+  }
+
+  /* Canvas файлы */
+  & .nav-file .nav-file-title[data-path$=".canvas"]::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-canvas);
+    mask-image: var(--uw-fe-icon-file-canvas);
+  }
+
+  /* Excalidraw файлы */
+  & .nav-file .nav-file-title[data-path$=".excalidraw.md"]::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-excalidraw);
+    mask-image: var(--uw-fe-icon-file-excalidraw);
+  }
+
+  /* Изображения */
+  & .nav-file .nav-file-title:is(
+    [data-path$=".svg"],
+    [data-path$=".bmp"],
+    [data-path$=".jpg"],
+    [data-path$=".gif"],
+    [data-path$=".webp"],
+    [data-path$=".jpeg"],
+    [data-path$=".png"]
+  )::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-image);
+    mask-image: var(--uw-fe-icon-file-image);
+  }
+
+  /* Аудио файлы */
+  & .nav-file .nav-file-title:is(
+    [data-path$=".mp3"],
+    [data-path$=".wav"],
+    [data-path$=".m4a"],
+    [data-path$=".ogg"],
+    [data-path$=".flac"],
+    [data-path$=".3gp"]
+  )::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-audio);
+    mask-image: var(--uw-fe-icon-file-audio);
+  }
+
+  /* WebM видео */
+  & .nav-file .nav-file-title[data-path$=".webm"]::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-webm);
+    mask-image: var(--uw-fe-icon-file-webm);
+  }
+
+  /* Видео файлы */
+  & .nav-file .nav-file-title:is(
+    [data-path$=".mp4"],
+    [data-path$=".ogv"],
+    [data-path$=".mov"],
+    [data-path$=".mkv"]
+  )::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-video);
+    mask-image: var(--uw-fe-icon-file-video);
+  }
+
+  /* Loom файлы */
+  & .nav-file .nav-file-title[data-path$=".loom"]::before {
+    -webkit-mask-image: var(--uw-fe-icon-file-loom);
+    mask-image: var(--uw-fe-icon-file-loom);
+  }
+}
