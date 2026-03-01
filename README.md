@@ -10,13 +10,13 @@
 
 **Файлы:**
 - `LS_File Explorer - File Colors.css` — цветовые метки для файлов по расширениям
-- `LS_File Explorer - Pills.css` — цветовые плашки для файлов и папок
+- `LS_File Explorer - Background Pills.css` — цветовые плашки для файлов и папок
 
 ---
 
 ## Установка
 
-1. Скачайте `.css` файлы из [релизов](https://github.com/LoocSiL/obsidian-ls-css/releases)
+1. Скачайте `.css` файлы из [релизов](https://github.com/LoocSiL/obsidian-ls-css-collection/releases)
 2. Поместите их в папку `.obsidian/snippets/` вашего хранилища
 3. В Obsidian: `Настройки` → `Внешний вид` → `CSS-сниппеты` → `Обновить` и включите нужные
 
@@ -26,7 +26,7 @@
 
 ## Описание сниппетов
 
-### LS File Colors
+### LS File Explorer - File Colors
 
 Раскрашивает названия файлов в проводнике в зависимости от расширения. Доступны категории:
 - Файлы Obsidian (.md, .canvas, .excalidraw, .base)
@@ -35,9 +35,9 @@
 
 Для каждой категории можно настроить цвет и включение.
 
-### LS File Explorer Pills
+### LS File Explorer - Background Pills
 
-Добавляет фоновые плашки для элементов проводника. Поддерживает два режима отображения:
+Добавляет фоновые плашки (pills) для элементов проводника. Поддерживает два режима отображения:
 - inline — плашка только под текстом
 - full row — плашка на всю ширину строки
 
@@ -48,4 +48,4 @@
 ## Поддержка
 
 Вопросы можно задать в Telegram: [excel_cad_bim_chat](https://t.me/excel_cad_bim_chat)  
-Баги и предложения — через [Issues](https://github.com/LoocSiL/obsidian-ls-css/issues)
+Баги и предложения — через [Issues](https://github.com/LoocSiL/obsidian-ls-css-collection/issues)
