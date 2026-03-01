@@ -10,7 +10,7 @@
 
 **Файлы:**
 - `LS_File Explorer - Background Pills.css` — цветовые плашки для файлов и папок
-- `LS_File Explorer - File Colors.css` — цветовые метки для файлов по расширениям
+- `LS_File Explorer - File Type Colors.css` — цветовые метки для файлов по расширениям
 
 ---
 
@@ -38,7 +38,7 @@
 
 [Полное описание сниппета](<docs/LS File Explorer - Background Pills.md>)
 
-### LS File Explorer - File Colors
+### LS File Explorer - File Type Colors
 
 Раскрашивает названия файлов в проводнике в зависимости от расширения. Доступны категории:
 - Файлы Obsidian (.md, .canvas, .excalidraw, .base)
