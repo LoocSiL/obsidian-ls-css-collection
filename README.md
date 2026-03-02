@@ -4,6 +4,8 @@
 
 ---
 
+[English](ENG_README.md)
+
 ## О сборке
 
 Репозиторий содержит CSS-сниппеты для кастомизации Obsidian. Сниппеты поддерживают настройку через плагин Style Settings.
@@ -36,7 +38,7 @@
 
 Дополнительно: иконки для папок и файлов, настройка скругления и отступов, перенос длинных названий.
 
-[Полное описание сниппета](<docs/LS File Explorer - Background Pills.md>)
+[Полное описание сниппета](<docs/RUS/LS File Explorer - Background Pills.md>)
 
 ![светлая тема](images/Example_02.png)
 ![темная тема](images/Example_01.png)
@@ -50,7 +52,7 @@
 
 Для каждой категории можно настроить цвет и включение.
 
-[Полное описание сниппета](<docs/LS File Explorer - File Type Colors.md>)
+[Полное описание сниппета](<docs/RUS/LS File Explorer - File Type Colors.md>)
 
 ![цвет текста](images/Example_03.png)
 
