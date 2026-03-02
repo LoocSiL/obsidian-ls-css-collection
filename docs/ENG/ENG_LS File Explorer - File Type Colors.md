@@ -45,7 +45,7 @@ The snippet integrates with the Style Settings plugin, providing a convenient in
 
 All settings are adjusted through the **Style Settings** plugin. Find the corresponding block in its settings list.
 
-![Settings](../images/FileTypeColors_00.png)
+![Settings](/images/FileTypeColors_00.png)
 
 ### 1. General Settings
 
@@ -53,7 +53,7 @@ All settings are adjusted through the **Style Settings** plugin. Find the corres
     - **Enabled:** If a file is open in the active tab, its name color in the explorer will match its file type (according to the settings below).
     - **Disabled (default):** The active file will be displayed with the standard color your theme uses for active items (usually a brighter or more contrasting color). File type colors are ignored in this case.
 
-![General Settings](../images/FileTypeColors_01.png)
+![General Settings](/images/FileTypeColors_01.png)
 
 ### 2. Obsidian Files
 
@@ -66,7 +66,7 @@ This section configures the main file types used directly within Obsidian.
 
 For each of these categories, there is an **Enable** toggle and a **Color** picker field.
 
-![Obsidian Files](../images/FileTypeColors_02.png)
+![Obsidian Files](/images/FileTypeColors_02.png)
 
 ### 3. Attachments
 
@@ -79,7 +79,7 @@ This section covers media files and documents often stored in an Obsidian vault.
 
 For each category, there is an **Enable** toggle and a **Color** picker field.
 
-![Attachments](../images/FileTypeColors_03.png)
+![Attachments](/images/FileTypeColors_03.png)
 
 ### 4. External Files
 
@@ -91,7 +91,7 @@ Files that are not native to Obsidian but can be added to the vault.
 
 For each category, there is an **Enable** toggle and a **Color** picker field.
 
-![External Files](../images/FileTypeColors_04.png)
+![External Files](/images/FileTypeColors_04.png)
 
 ## Usage Examples
 

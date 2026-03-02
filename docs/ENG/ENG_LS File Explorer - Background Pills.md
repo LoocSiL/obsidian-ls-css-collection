@@ -48,7 +48,7 @@ After enabling, a new settings block `💢 LS CSS File Explorer - Background Pil
 
 All settings are adjusted through the standard Obsidian interface. After enabling the snippet, find the corresponding block at the bottom of the "Appearance" settings page.
 
-![StyleSettings](../images/BackgroundPills_00.png)
+![StyleSettings](/images/BackgroundPills_00.png)
 
 ### 1. Mode Selection
 
@@ -58,7 +58,7 @@ All settings are adjusted through the standard Obsidian interface. After enablin
 - **Start background from text (for "Full row" mode):** If enabled, the background pill starts immediately after the icon/arrow, not covering the leftmost part of the row. If disabled, the pill spans the entire row.
 - **Wrap long names:** Enable this option so that names which don't fit horizontally wrap to the next line. This removes horizontal scrolling.
 
-![Mode Selection](../images/BackgroundPills_01.png)
+![Mode Selection](/images/BackgroundPills_01.png)
 
 ### 2. Folders
 
@@ -72,7 +72,7 @@ All settings are adjusted through the standard Obsidian interface. After enablin
 - **Folder - active (expanded):** Background color for a folder that is expanded (showing its contents). Used if "Highlight expanded folders" is enabled.
 - **Folder - selected:** Background color for a folder that is selected (e.g., when clicked on).
 
-![Folders](../images/BackgroundPills_02.png)
+![Folders](/images/BackgroundPills_02.png)
 
 ### 3. Files
 
@@ -85,7 +85,7 @@ All settings are adjusted through the standard Obsidian interface. After enablin
 - **File - active:** Background color for the active file (e.g., the one open in the current tab).
 - **File - selected:** Background color for a file that is selected (e.g., for renaming or moving).
 
-![Files](../images/BackgroundPills_03.png)
+![Files](/images/BackgroundPills_03.png)
 
 ### 4. Geometry
 
@@ -96,7 +96,7 @@ All settings are adjusted through the standard Obsidian interface. After enablin
     - *Horizontal padding (left/right):* Horizontal spacing from the text to the pill's edges.
     - *Vertical padding (top/bottom):* Vertical spacing from the text to the pill's edges.
 
-![Geometry](../images/BackgroundPills_04.png)
+![Geometry](/images/BackgroundPills_04.png)
 
 ## Usage Examples
 
