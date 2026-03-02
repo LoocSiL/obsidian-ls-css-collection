@@ -42,7 +42,7 @@ The snippet offers flexible settings via the `Settings > Appearance > CSS snippe
 5.  Click the **Reload** button to see the list of available snippets.
 6.  Enable the `LS File Explorer - Background Pills` snippet using its toggle switch.
 
-After enabling, a new settings block `💢 LS CSS File Explorer - Background Pills` will appear at the bottom of your settings (within the CSS snippets list).
+**Important:** To access the color settings, make sure you have the **Style Settings** plugin installed and enabled. After enabling the snippet, a new block `💢 LS CSS File Explorer - Background Pills` will appear in the Style Settings.
 
 ## Appearance Settings
 
